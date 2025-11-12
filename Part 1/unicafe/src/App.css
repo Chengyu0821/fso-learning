@@ -1,0 +1,134 @@
+/* 设置全局样式 */
+/* 全局样式 */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f0f8ff, #e6f7ff); /* 浅色渐变背景 */
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 段落样式 */
+p {
+  text-align: center;
+  font-size: 1.2em;
+  margin: 10px 20px;
+  color: #555; /* 调整文字颜色以适配浅色背景 */
+}
+
+/* 表格样式 */
+table {
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 表头样式 */
+thead {
+  background-color: #6a11cb;
+  color: #fff;
+}
+
+/* 单元格样式 */
+td, th {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+/* 隔行变色 */
+tbody tr:nth-child(even) {
+  background-color: #f3f3f3;
+}
+
+/* 鼠标悬停效果 */
+tbody tr:hover {
+  background-color: #e9e9e9;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+  table {
+    width: 100%;
+    font-size: 0.9em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+}
+
+/* 按钮基础样式 */
+button {
+  background-color: #6a11cb;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 按钮基础样式 */
+button {
+  background-color: #ff7f50; /* 使用珊瑚色 */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px; /* 添加按钮间距 */
+}
+
+/* 按钮基础样式 */
+button {
+  background: linear-gradient(135deg, #ff7f50, #ff6347); /* 渐变背景 */
+  color: #fff;
+  border: none;
+  border-radius: 50px; /* 更圆润的按钮 */
+  padding: 12px 30px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 增加阴影 */
+  margin: 12px; /* 添加按钮间距 */
+}
+
+/* 鼠标悬停效果 */
+button:hover {
+  background: linear-gradient(135deg, #ff6347, #ff4500); /* 更深的渐变 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
+  transform: translateY(-2px); /* 悬浮效果 */
+}
+
+/* 按钮点击效果 */
+button:active {
+  background: linear-gradient(135deg, #e5533c, #d9432f); /* 点击时颜色更深 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 减弱阴影 */
+  transform: translateY(2px); /* 按下效果 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  button {
+    padding: 10px 24px;
+    font-size: 0.9em;
+    margin: 10px; /* 响应式下调整间距 */
+  }
+}
