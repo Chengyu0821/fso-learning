@@ -8,8 +8,17 @@ const Header = (props) => {
   )
 }
 
-const Total = (props) => {
-  console.log(props)
+const Total = ({ parts }) => {
+
+  const total = parts.reduce((sum, part) => sum + part.exercises, 0)
+  // array.reduce((累计值, 当前元素) => { ...return 新的累计值 }, 初始值)
+  
+  return (
+    <>
+    <p>Number of exercises {total}</p>
+    </>
+  )
+  
   return (
     <>
     <p>Number of exercises {props.number}</p>
@@ -34,27 +43,30 @@ const Part = (props) => (
 
 
 const App = () => {
-  const course = 'Half Stack application development Test Test'
-
-
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
-
-  const parts = [
-    { id: 1, name: part1, exercises: exercises1 },
-    { id: 2, name: part2, exercises: exercises2 },
-    { id: 3, name: part3, exercises: exercises3 },
-  ]
+  // const course = 'Half Stack application development Test Test'
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
 
   return (
     <div>
-      <Header course={course} />
-      <Content parts={parts} />
-      <Total parts={parts} />
+      <Header course={course.name} />
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   )
 }
