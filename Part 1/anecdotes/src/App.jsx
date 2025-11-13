@@ -41,7 +41,6 @@ const App = () => {
       {/* 找出 第一个等于 maxVotes 的元素的下标 */}
       <p>has {maxVotes} votes</p>
       
-    
     </div>
   )
 }
