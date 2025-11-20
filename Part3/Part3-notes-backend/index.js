@@ -95,8 +95,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 
 
-
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 // listen → 服务端接受请求（input), 等待请求
 // 在local的3001 Port 端口
 app.listen(PORT, () => {

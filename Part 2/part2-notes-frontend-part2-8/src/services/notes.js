@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../../Part3/part3-notes-frontend/node_modules/axios'
 const baseUrl = 'http://localhost:3001/api/notes'
 
 const getAll = () => {
