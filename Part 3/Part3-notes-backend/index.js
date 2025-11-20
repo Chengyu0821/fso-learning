@@ -2,10 +2,6 @@ const express = require('express')
 const app = express()
 //express = “生产服务器的工厂函数”
 
-const cors = require('cors')
-
-app.use(cors())
-
 let notes = [
   {
     id: '1',
@@ -35,6 +31,7 @@ const requestLogger = (request, response, next) => {
 //把原本的 JSON 字符串解析 → 转成 JavaScript 对象 → 放进 request.body（可解析）
 // 会自动解析所有 Content-Type 是 application/json 的请求。
 app.use(express.json())
+app.use(express.static('dist'))
 app.use(requestLogger)
 
 app.get('/', (request, response) => {
@@ -90,6 +87,12 @@ app.delete('/api/notes/:id', (request, response) => {
 
   response.status(204).end()
 })
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+app.use(unknownEndpoint)
 
 
 
