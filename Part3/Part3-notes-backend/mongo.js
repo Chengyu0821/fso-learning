@@ -51,7 +51,7 @@ const note = new Note({
   important: true,
 })
 
-note.save().then(result => {
+note.save().then(() => {
   console.log('note saved!')
   // 关闭数据库连接，如果不关闭，程序不会退出
   // 因为保存是异步操作，只有在 .then() 回调里才能确保数据库写入已经完成，关闭连接才安全

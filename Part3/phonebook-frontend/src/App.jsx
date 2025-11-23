@@ -13,6 +13,13 @@ const App = () => {
   const [filter, setFilter] = useState('')
   const [message, setMessage] = useState({ message: '', isError: false })
 
+  const showMessage = (text, isError = false) => {
+    setMessage({ message: text, isError })
+    setTimeout(() => {
+      setMessage({ message: '', isError: false })
+    }, 5000)
+  }
+
   useEffect(() => {
     jsonService
       .getAll()
@@ -21,13 +28,9 @@ const App = () => {
       })
       .catch(error => {
         console.error('Failed to fetch persons:', error)
-        setMessage({
-          message: 'Failed to load phonebook from server',
-          isError: true,
-        })
-        setTimeout(() => {
-          setMessage({ message: '', isError: false })
-        }, 5000)
+        const errorMessage =
+          error.response?.data?.error || 'Failed to load phonebook from server'
+        showMessage(errorMessage, true)
       })
   }, [])
 
@@ -69,17 +72,14 @@ const App = () => {
         setPersons(prev => prev.concat(returnedPerson))
         setNewName('')
         setNewPhone('')
-        setMessage({ message: `${trimmedName} is added`, isError: false })
+        showMessage(`${trimmedName} is added`, false)
       })
       .catch(error => {
         console.error('Failed to add person:', error)
-        setMessage({
-          message: `Failed to add ${trimmedName}`,
-          isError: true,
-        })
-        setTimeout(() => {
-          setMessage({ message: '', isError: false })
-        }, 5000)
+        // 这里是 3.19* 关键：显示后端返回的 validation 错误
+        const errorMessage =
+          error.response?.data?.error || `Failed to add ${trimmedName}`
+        showMessage(errorMessage, true)
       })
   }
 
@@ -103,22 +103,20 @@ const App = () => {
         setPersons(prev =>
           prev.map(p => (p.id === person.id ? returnedPerson : p))
         )
-        setMessage({
-          message: `${person.name} changed the number to ${newNumber}`,
-          isError: false,
-        })
+        showMessage(
+          `${person.name} changed the number to ${newNumber}`,
+          false
+        )
         setNewName('')
         setNewPhone('')
       })
       .catch(error => {
         console.error('Failed to update number:', error)
-        setMessage({
-          message: `'${person.name}' was already removed from server`,
-          isError: true,
-        })
-        setTimeout(() => {
-          setMessage({ message: '', isError: false })
-        }, 5000)
+        // 如果是 404（后端已经删掉），我们按教程给那句提示
+        const errorMessage =
+          error.response?.data?.error ||
+          `'${person.name}' was already removed from server`
+        showMessage(errorMessage, true)
         // 用 prev，避免用到旧的 persons
         setPersons(prev => prev.filter(p => p.id !== person.id))
       })
@@ -132,17 +130,13 @@ const App = () => {
       .remove(id)
       .then(() => {
         setPersons(prev => prev.filter(person => person.id !== id))
-        setMessage({ message: `${name} is deleted`, isError: false })
+        showMessage(`${name} is deleted`, false)
       })
       .catch(error => {
         console.error('Failed to delete person:', error)
-        setMessage({
-          message: `Failed to delete ${name}`,
-          isError: true,
-        })
-        setTimeout(() => {
-          setMessage({ message: '', isError: false })
-        }, 5000)
+        const errorMessage =
+          error.response?.data?.error || `Failed to delete ${name}`
+        showMessage(errorMessage, true)
       })
   }
 
