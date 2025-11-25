@@ -18,6 +18,8 @@ const errorHandler = (error, request, response, next) => {
   // 现在 blog 还没用到 CastError / ValidationError，也可以先留着
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).send({ error: error.message })
   }
 
   next(error)
