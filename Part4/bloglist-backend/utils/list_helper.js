@@ -1,8 +1,3 @@
-const dummy = (blogs) => {
-    return 1
-  }
-  
-
 const totalLikes = (blogs) => {
   return blogs.reduce((acc, blog) => acc + blog.likes, 0)
 }
@@ -37,7 +32,7 @@ const mostBlogs = (blogs) => {
   //   "Michael Chan": 1
   // }
   //
-  const authorCount = blogs.reduce((acc, blog)=> {
+  const authorCount = blogs.reduce((acc, blog) => {
     // 对于 blog.author：
     // 如果 acc 里没有这个作者 → 用 0 初始化
     // 然后 +1（这篇文章计入他的数量）
@@ -79,13 +74,13 @@ const mostBlogs = (blogs) => {
   return {
     author: topAuthor,
     blogs: blogCount
-  } 
+  }
 }
 
 const mostLikes = (blogs) => {
   if (blogs.length === 0) return null
 
-  const authorCount = blogs.reduce((acc, blog)=> {
+  const authorCount = blogs.reduce((acc, blog) => {
     acc[blog.author] = (acc[blog.author] || 0) + blog.likes
     return acc
   }, {})
@@ -96,11 +91,10 @@ const mostLikes = (blogs) => {
   return {
     author: topAuthor,
     likes: likesCount
-  } 
+  }
 }
 
 module.exports = {
-  dummy,
   totalLikes,
   favoriteBlog,
   mostBlogs,
