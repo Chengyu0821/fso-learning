@@ -24,6 +24,7 @@ blogsRouter.get('/:id', async(request, response) => {
 blogsRouter.post('/', middleware.userExtractor, async(request, response) => {
   const body = request.body
   const user = request.user
+  // middleware userExtractor 已经把 User 文档挂在 request.user
 
   if (!user) {
     return response.status(400).json({ error: 'userId is missing or not valid' })
@@ -42,7 +43,6 @@ blogsRouter.post('/', middleware.userExtractor, async(request, response) => {
   // 将新创建的 blog 的 id 添加到 user.blogs 数组中
   user.blogs = user.blogs.concat(savedBlog._id)
   await user.save()
-
   response.status(201).json(savedBlog)
 })
 
@@ -62,7 +62,6 @@ blogsRouter.delete('/:id', middleware.userExtractor, async(request, response) =>
 
   await Blog.findByIdAndDelete(blogId)
   return response.status(204).end()
-
 })
 
 blogsRouter.put('/:id', async(request, response) => {
