@@ -22,25 +22,25 @@ const App = () => {
     // 1. 从浏览器的 localStorage 中获取存储的用户登录信息
     //    'loggedNoteappUser' 是存储时使用的键名
     const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
-    
+
     // 2. 检查是否存在存储的用户信息
     if (loggedUserJSON) {
       // 3. 将 JSON 字符串解析为 JavaScript 对象
       const user = JSON.parse(loggedUserJSON)
-      
+
       setUser(user)
       blogService.setToken(user.token)
-    }  
+    }
   }, [])
 
   const handleLogin = async (username, password) => {
     try {
       const user = await loginService.login({ username, password })
-          // 将用户对象存储到浏览器的 localStorage 中
-          window.localStorage.setItem(
-          'loggedNoteappUser',      // 键名：用于后续检索的标识符
-          JSON.stringify(user)      // 值：将用户对象转换为 JSON 字符串存储
-        )
+      // 将用户对象存储到浏览器的 localStorage 中
+      window.localStorage.setItem(
+        'loggedNoteappUser',      // 键名：用于后续检索的标识符
+        JSON.stringify(user)      // 值：将用户对象转换为 JSON 字符串存储
+      )
 
       blogService.setToken(user.token)
       setUser(user)

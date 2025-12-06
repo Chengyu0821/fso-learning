@@ -39,7 +39,7 @@ describe('Note app', () => {
     await expect(errorDiv).toContainText('wrong credentials')
     await expect(errorDiv).toHaveCSS('border-style', 'solid')
     await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
-    await expect(page.getByText('Matti Luukkainen logged in')).not.toBeVisible()
+    await expect(page.getByText('mluukkai logged in')).not.toBeVisible()
   })
 
   describe('when logged in', () => {
@@ -73,8 +73,6 @@ describe('Note app', () => {
       })
 
       test.only('one of those can be made nonimportant', async ({ page }) => {
-        test.setTimeout(10_000)
-      
         // 方法一：getByText + locator('..') —— 教程里的写法
         const secondNoteElement = page.getByText('second note').locator('..')
 
