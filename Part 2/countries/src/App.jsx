@@ -1,27 +1,14 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import './App.css'
 import CountriesList from './components/CountriesList'
 import Country from './components/country'
 import Filter from './components/Filter'
+import { useCountries } from './hooks'
 
 const App = () => {
-  const [countries, setCountries] = useState([])
+  const countries = useCountries()
   const [filter, setFilter] = useState('')
   const [countryToSelect, setCountryToSelect] = useState(null)
-
-  useEffect(() => {
-    axios
-      .get('https://studies.cs.helsinki.fi/restcountries/api/all')
-      .then(response => {
-        setCountries(response.data)
-      })
-      .catch(err => {
-        setError('Failed to fetch countries')
-        setLoading(false)
-      })
-  }, [])
-
 
   const handleFilter = (event) => {
     setFilter(event.target.value)
