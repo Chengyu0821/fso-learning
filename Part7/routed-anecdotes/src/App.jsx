@@ -9,6 +9,8 @@ import {
   useMatch,
 } from "react-router-dom"
 
+import { useField } from './hooks'
+
 const Notification = ({ message }) => {
   if (message === '') {
     return null
@@ -65,21 +67,31 @@ const Footer = () => (
 )
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
+  const content = useField('text')
+  const author = useField('text')
+  const info = useField('text')
 
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     props.addNew({
-      content,
-      author,
-      info,
+      content: content.input.value,
+      author: author.input.value,
+      info: info.input.value,
       votes: 0
     })
     navigate('/')
+  }
+
+  const handleReset = () => {
+    content.reset()
+    author.reset()
+    info.reset()
+  }
+
+  const margin = {
+    marginLeft: 5 
   }
 
   return (
@@ -87,22 +99,28 @@ const CreateNew = (props) => {
       <h3>create a new anecdote</h3>
       <form onSubmit={handleSubmit}>
         <div>
-          content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+          Content
+          <input style={margin} {...content.input} /> 
         </div>
         <div>
-          author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+          Author
+          <input style={margin} {...author.input} /> 
         </div>
         <div>
-          url for more info
-          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
+          Url for more info
+          <input style={margin} {...info.input} /> 
         </div>
-        <button>create</button>
+        <button type="submit">create</button>
+        <button
+          type="button"
+          onClick={handleReset}
+          style={margin}
+        >
+          reset
+        </button>
       </form>
     </div>
   )
-
 }
 
 const App = () => {
